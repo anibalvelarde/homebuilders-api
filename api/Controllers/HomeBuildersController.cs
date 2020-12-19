@@ -9,30 +9,48 @@ using Microsoft.Extensions.Logging;
 namespace HomeBuilders.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class HomeBuildersController : ControllerBase
     {
         private List<HomeBuilder> _builders = null;
 
         private readonly ILogger<HomeBuildersController> _logger;
 
-        public HomeBuildersController(ILogger<HomeBuildersController> logger)
+        public HomeBuildersController(ILogger<HomeBuildersController> logger) => _logger = logger;
+
+        [HttpPost]
+        public async Task<ActionResult<HomeBuilder>> CreateBuilder([FromBody] HomeBuilder createBuilder)
         {
-            _logger = logger;
+            foreach (var hdr in Request.Headers)
+            {
+                Console.WriteLine($"Request: [{hdr.Key.ToString()}]: - - -> {hdr.Value.ToString()}");
+            }
+            var aBuilder = GetFakeHomeBuilders().FirstOrDefault(b => b.BbbId.Equals(createBuilder.BbbId));
+            if (aBuilder is null)
+            {
+                var wellFormedBuilder = await Task.FromResult(new HomeBuilder(_builders.Count, createBuilder));
+                _builders.Add(wellFormedBuilder);
+                return new OkObjectResult(wellFormedBuilder);
+            }
+            return new BadRequestObjectResult(createBuilder);
         }
 
         [HttpGet]
-        [Route("/homebuilders")]
         public IEnumerable<HomeBuilder> Get()
         {
             return GetFakeHomeBuilders();
         }
 
         [HttpGet]
-        [Route("/homebuilders/{id}")]
-        public HomeBuilder Get(int id)
+        [Route("/api/[controller]/{id}")]
+        public ActionResult<HomeBuilder> Get(int id)
         {
-            return GetFakeHomeBuilders().First(s => s.Id.Equals(id));
+            var homeBuilder = GetFakeHomeBuilders().FirstOrDefault(s => s.Id.Equals(id));
+            if (homeBuilder is null)
+            {
+                return new NotFoundObjectResult(new HomeBuilder(id));
+            }
+            return homeBuilder;
         }
 
         private IEnumerable<HomeBuilder> GetFakeHomeBuilders()
@@ -49,7 +67,7 @@ namespace HomeBuilders.Api.Controllers
         }
 
         private HomeBuilder MakeFakeHomeBuilder(int id)
-        {   
+        {
             var dateStamp = DateTime.UtcNow;
             return new HomeBuilder(id)
             {
