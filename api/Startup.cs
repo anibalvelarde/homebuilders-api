@@ -52,6 +52,7 @@ namespace api.homebuilders
             services.AddScoped<IHomeBuildersService, HomeBuildersService>();
             services.AddScoped<IClientsService, ClientsService>();
             services.AddScoped<IProjectsService, ProjectsService>();
+            services.AddScoped<IWorkOrdersService, WorkOrdersService>();
             services.AddScoped<IEmployeesService, EmployeesService>();
             services.AddScoped<IServicePlansService, ServicePlansService>();
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace HomeBuilders.Api.Domain.Models
 {
-    public class RequestForAction
+    public class WorkOrder
     {
-        public RequestForAction(Guid stepRefId)
+        public WorkOrder(Guid stepRefId)
         {
             Id = Guid.NewGuid();
             StepReferenceId = stepRefId;
