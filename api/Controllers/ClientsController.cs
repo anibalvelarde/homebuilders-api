@@ -25,28 +25,28 @@ namespace HomeBuilders.Api.Controllers
         [Route("/clients")]
         public async Task<List<Client>> GetClientsAsync()
         {
-            return await _srvice.GetClientsAsync();
+            return await _service.GetClientsAsync();
         }
 
         [HttpGet]
         [Route("/clients/{id}")]
         public async Task<Client> GetClientById(int id)
         {
-            return await _srvice.GetClientByIdAsync(id);
+            return await _service.GetClientByIdAsync(id);
         }
 
         [HttpPost]
         [Route("/clients")]
         public async Task<Client> AddNewClient([FromBody] NewClientRequest clientRequest)
         {
-            return await _srvice.AddNewClientAsync(clientRequest.Prospect);
+            return await _service.AddNewClientAsync(clientRequest.Prospect);
         }
 
         [HttpPut]
         [Route("/clients")]
         public async Task<Client> UpdateExistingClient([FromBody] ExistingClientRequest clientRequest)
         {
-            return await _srvice.UpdateExistingClient(clientRequest.cl);
+            return await _service.UpdateExistingClient(clientRequest.cl);
         }
     }
 }
