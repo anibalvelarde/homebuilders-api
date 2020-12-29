@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HomeBuilders.Api.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using HomeBuilders.Api.Services.Interfaces;
 
 namespace HomeBuilders.Api.Controllers
 {
@@ -12,54 +13,27 @@ namespace HomeBuilders.Api.Controllers
     [Route("[controller]")]
     public class HomeBuildersController : ControllerBase
     {
-        private List<HomeBuilder> _builders = null;
-
+        private IHomeBuildersService _hbService;
         private readonly ILogger<HomeBuildersController> _logger;
 
-        public HomeBuildersController(ILogger<HomeBuildersController> logger)
+        public HomeBuildersController(ILogger<HomeBuildersController> logger, IHomeBuildersService hbService)
         {
             _logger = logger;
+            _hbService = hbService;
         }
 
         [HttpGet]
         [Route("/homebuilders")]
-        public IEnumerable<HomeBuilder> Get()
+        public async Task<IEnumerable<HomeBuilder>> Get()
         {
-            return GetFakeHomeBuilders();
+            return await _hbService.GetHomeBuilderList();
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}")]
-        public HomeBuilder Get(int id)
+        public async Task<HomeBuilder> Get(int id)
         {
-            return GetFakeHomeBuilders().First(s => s.Id.Equals(id));
-        }
-
-        private IEnumerable<HomeBuilder> GetFakeHomeBuilders()
-        {
-            if (_builders == null)
-            {
-                _builders = new List<HomeBuilder>();
-                for (int i = 0; i < 5; i++)
-                {
-                    _builders.Add(MakeFakeHomeBuilder(i));
-                }
-            }
-            return _builders.AsEnumerable();
-        }
-
-        private HomeBuilder MakeFakeHomeBuilder(int id)
-        {   
-            var dateStamp = DateTime.UtcNow;
-            return new HomeBuilder(id)
-            {
-                Name = $"Builder-{DateTime.Now.ToUniversalTime().ToString()}",
-                Address = "some address for builder",
-                BbbId = Guid.NewGuid().ToString(),
-                WebAddress = $"www.{dateStamp.ToString()}webserver.com",
-                Phone = $"555-555-1{DateTime.Now.Millisecond}",
-                Email = $"somebuilder@{dateStamp.ToString()}emailserver.com"
-            };
+            return await _hbService.GetHomeBuilderById(id);
         }
     }
 }
