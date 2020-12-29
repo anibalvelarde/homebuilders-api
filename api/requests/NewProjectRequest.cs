@@ -5,6 +5,7 @@ namespace HomeBuilders.Api.Requests
     public class NewProjectRequest
     {
         public NewProjectRequest() { }
-        public Project NewGig {get; set;}
+        public HomeBuilder Builder { get; set; }
+        public Project NewGig { get; set; }
     }
 }
