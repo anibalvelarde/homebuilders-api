@@ -41,9 +41,9 @@ namespace api.homebuilders
                     Description = "API for Tracking Home Builder projects and Requests for follow-up.",
                     Contact = new OpenApiContact
                     {
-                        Name = "Anibalj Velarde",
+                        Name = "Anibal Velarde",
                         Email = string.Empty,
-                        Url = new Uri("https://anibalvelarde.com/"),
+                        Url = new Uri("http://anibalvelarde.com/"),
                     },
                 });
             });
