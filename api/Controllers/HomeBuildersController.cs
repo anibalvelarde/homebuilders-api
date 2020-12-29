@@ -72,8 +72,8 @@ namespace HomeBuilders.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/homebuilders/{id}/pending-actions")]
-        public async Task<Stats> GetPendingActrionsAsync(int id)
+        [Route("/homebuilders/{id}/pending-workorders")]
+        public async Task<Stats> GetPendingWorkOrdersAsync(int id)
         {
             throw new NotImplementedException();
         }
