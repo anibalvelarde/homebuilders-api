@@ -39,7 +39,7 @@ namespace HomeBuilders.Api.Controllers
         [Route("/Employees")]
         public async Task<Employee> AddNewEmployee([FromBody] NewEmployeeRequest EmployeeRequest)
         {
-            return await _service.AddNewEmployeeAsync(EmployeeRequest.Prospect);
+            return await _service.AddNewEmployeeAsync(EmployeeRequest.NewHire);
         }
 
         [HttpPut]

@@ -39,7 +39,7 @@ namespace HomeBuilders.Api.Controllers
         [Route("/projects")]
         public async Task<Project> AddNewProject([FromBody] NewProjectRequest ProjectRequest)
         {
-            return await _service.AddNewProjectAsync(ProjectRequest.Prospect);
+            return await _service.AddNewProjectAsync(ProjectRequest.NewGig);
         }
 
         [HttpPut]

@@ -5,6 +5,6 @@ namespace HomeBuilders.Api.Requests
     public class NewEmployeeRequest
     {
         public NewEmployeeRequest() { }
-        public Employee Prospect { get; set; }
+        public Employee NewHire  { get; set; }
     }
 }
