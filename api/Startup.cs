@@ -50,6 +50,7 @@ namespace api.homebuilders
 
             // Dependencies
             services.AddScoped<IHomeBuildersService, HomeBuildersService>();
+            services.AddScoped<IClientsService, ClientsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
