@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace api.homebuilders
 {
@@ -28,6 +29,26 @@ namespace api.homebuilders
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Register the Swagger Generator service. This service is responsible for genrating Swagger Documents.
+            // Note: Add this service at the end after AddMvc() or AddMvcCore().
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "HomeBuilders API",
+                    Version = "v1",
+                    Description = "API for Tracking Home Builder projects and Requests for follow-up.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Anibalj Velarde",
+                        Email = string.Empty,
+                        Url = new Uri("https://anibalvelarde.com/"),
+                    },
+                });
+            });
+
+            // Dependencies
             services.AddScoped<IHomeBuildersService, HomeBuildersService>();
         }
 
@@ -38,6 +59,19 @@ namespace api.homebuilders
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HomeBuilders API V1");
+
+                // To serve SwaggerUI at application's root page, set the RoutePrefix property to an empty string.
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 
