@@ -24,16 +24,58 @@ namespace HomeBuilders.Api.Controllers
 
         [HttpGet]
         [Route("/homebuilders")]
-        public async Task<IEnumerable<HomeBuilder>> Get()
+        public async Task<IEnumerable<HomeBuilder>> GetHomeBuildersAsync()
         {
             return await _hbService.GetHomeBuilderList();
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}")]
-        public async Task<HomeBuilder> Get(int id)
+        public async Task<HomeBuilder> GetHomeBuilderByIdAsync(int id)
         {
             return await _hbService.GetHomeBuilderById(id);
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/clients")]
+        public async Task<List<Client>> GetClientsAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/projects")]
+        public async Task<List<Project>> GetProjectsAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/employees")]
+        public async Task<List<Employee>> GetEmployeesAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/service-plan")]
+        public async Task<ServicePlan> GetServicePlanAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/stats")]
+        public async Task<Stats> GetStatsAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/pending-actions")]
+        public async Task<Stats> GetPendingActrionsAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
