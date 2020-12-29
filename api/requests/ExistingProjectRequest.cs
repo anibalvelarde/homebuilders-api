@@ -2,8 +2,8 @@ using HomeBuilders.Api.Domain.Models;
 
 namespace HomeBuilders.Api.Requests
 {
-    public class ExistingClientRequest
+    public class ExistingProjectRequest
     {
-        public Client ClientToUpdate { get; set; }
+        public Project ProjectToUpdate { get; set; }
     }
 }

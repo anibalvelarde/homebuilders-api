@@ -10,43 +10,43 @@ namespace HomeBuilders.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ClientsController
+    public class ProjectsController
     {
-        private ILogger<ClientsController> _logger;
-        private IClientsService _service;
+        private ILogger<ProjectsController> _logger;
+        private IProjectsService _service;
 
-        public ClientsController(ILogger<ClientsController> logger, IClientsService service)
+        public ProjectsController(ILogger<ProjectsController> logger, IProjectsService service)
         {
             _logger = logger;
             _service = service;
         }
 
         [HttpGet]
-        [Route("/clients")]
-        public async Task<List<Client>> GetClientsAsync()
+        [Route("/projects")]
+        public async Task<List<Project>> GetProjectsAsync()
         {
-            return await _service.GetClientsAsync();
+            return await _service.GetProjectsAsync();
         }
 
         [HttpGet]
-        [Route("/clients/{id}")]
-        public async Task<Client> GetClientById(int id)
+        [Route("/projects/{id}")]
+        public async Task<Project> GetProjectById(int id)
         {
-            return await _service.GetClientByIdAsync(id);
+            return await _service.GetProjectByIdAsync(id);
         }
 
         [HttpPost]
-        [Route("/clients")]
-        public async Task<Client> AddNewClient([FromBody] NewClientRequest clientRequest)
+        [Route("/projects")]
+        public async Task<Project> AddNewProject([FromBody] NewProjectRequest ProjectRequest)
         {
-            return await _service.AddNewClientAsync(clientRequest.Prospect);
+            return await _service.AddNewProjectAsync(ProjectRequest.Prospect);
         }
 
         [HttpPut]
-        [Route("/clients")]
-        public async Task<Client> UpdateExistingClient([FromBody] ExistingClientRequest clientRequest)
+        [Route("/projects")]
+        public async Task<Project> UpdateExistingProject([FromBody] ExistingProjectRequest ProjectRequest)
         {
-            return await _service.UpdateExistingClient(clientRequest.ClientToUpdate);
+            return await _service.UpdateExistingProject(ProjectRequest.ProjectToUpdate);
         }
     }
 }
