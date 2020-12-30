@@ -152,6 +152,7 @@ namespace HomeBuilders.Api.Services
                 Email = $"email-{fakeBuilderId}@server-{fakeBuilderId}.com",
                 Phone = $"867-5{fakeBuilderId}-5309",
                 WebAddress = $"www.server-{fakeBuilderId}.com"
+
             };
         }
     }

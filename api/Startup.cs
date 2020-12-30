@@ -53,7 +53,6 @@ namespace api.homebuilders
                         Url = new Uri("http://anibalvelarde.com/"),
                     },
                 });
-                c.DescribeAllEnumsAsStrings();
             });
 
             // Dependencies
