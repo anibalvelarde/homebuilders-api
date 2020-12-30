@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HomeBuilders.Api.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using HomeBuilders.Api.Services.Interfaces;
 
 namespace HomeBuilders.Api.Controllers
 {
@@ -12,72 +13,69 @@ namespace HomeBuilders.Api.Controllers
     [Route("/api/[controller]")]
     public class HomeBuildersController : ControllerBase
     {
-        private List<HomeBuilder> _builders = null;
-
+        private IHomeBuildersService _hbService;
         private readonly ILogger<HomeBuildersController> _logger;
 
-        public HomeBuildersController(ILogger<HomeBuildersController> logger) => _logger = logger;
-
-        [HttpPost]
-        public async Task<ActionResult<HomeBuilder>> CreateBuilder([FromBody] HomeBuilder createBuilder)
+        public HomeBuildersController(ILogger<HomeBuildersController> logger, IHomeBuildersService hbService)
         {
-            foreach (var hdr in Request.Headers)
-            {
-                Console.WriteLine($"Request: [{hdr.Key.ToString()}]: - - -> {hdr.Value.ToString()}");
-            }
-            var aBuilder = GetFakeHomeBuilders().FirstOrDefault(b => b.BbbId.Equals(createBuilder.BbbId));
-            if (aBuilder is null)
-            {
-                var wellFormedBuilder = await Task.FromResult(new HomeBuilder(_builders.Count, createBuilder));
-                _builders.Add(wellFormedBuilder);
-                return new OkObjectResult(wellFormedBuilder);
-            }
-            return new BadRequestObjectResult(createBuilder);
+            _logger = logger;
+            _hbService = hbService;
         }
 
         [HttpGet]
-        public IEnumerable<HomeBuilder> Get()
+        [Route("/homebuilders")]
+        public async Task<IEnumerable<HomeBuilder>> GetHomeBuildersAsync()
         {
-            return GetFakeHomeBuilders();
+            return await _hbService.GetHomeBuilderListAsync();
         }
 
         [HttpGet]
-        [Route("/api/[controller]/{id}")]
-        public ActionResult<HomeBuilder> Get(int id)
+        [Route("/homebuilders/{id}")]
+        public async Task<HomeBuilder> GetHomeBuilderByIdAsync(int id)
         {
-            var homeBuilder = GetFakeHomeBuilders().FirstOrDefault(s => s.Id.Equals(id));
-            if (homeBuilder is null)
-            {
-                return new NotFoundObjectResult(new HomeBuilder(id));
-            }
-            return homeBuilder;
+            return await _hbService.GetHomeBuilderByIdAsync(id);
         }
 
-        private IEnumerable<HomeBuilder> GetFakeHomeBuilders()
+        [HttpGet]
+        [Route("/homebuilders/{id}/clients")]
+        public async Task<List<Client>> GetClientsAsync(int id)
         {
-            if (_builders == null)
-            {
-                _builders = new List<HomeBuilder>();
-                for (int i = 0; i < 5; i++)
-                {
-                    _builders.Add(MakeFakeHomeBuilder(i));
-                }
-            }
-            return _builders.AsEnumerable();
+            return await _hbService.GetClientsForBuilderAsync(id);
         }
 
-        private HomeBuilder MakeFakeHomeBuilder(int id)
+        [HttpGet]
+        [Route("/homebuilders/{id}/projects")]
+        public async Task<List<Project>> GetProjectsAsync(int id)
         {
-            var dateStamp = DateTime.UtcNow;
-            return new HomeBuilder(id)
-            {
-                Name = $"Builder-{DateTime.Now.ToUniversalTime().ToString()}",
-                Address = "some address for builder",
-                BbbId = Guid.NewGuid().ToString(),
-                WebAddress = $"www.{dateStamp.ToString()}webserver.com",
-                Phone = $"555-555-1{DateTime.Now.Millisecond}",
-                Email = $"somebuilder@{dateStamp.ToString()}emailserver.com"
-            };
+            return await _hbService.GetProjectsForBuilderAsync(id);
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/employees")]
+        public async Task<List<Employee>> GetEmployeesAsync(int id)
+        {
+            return await _hbService.GetEmployeesForBuilderAsync(id);
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/service-plan")]
+        public async Task<ServicePlan> GetServicePlanAsync(int id)
+        {
+            return await _hbService.GetServicePlansForBuilderAsync(id);
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/stats")]
+        public async Task<Stats> GetStatsAsync(int id)
+        {
+            return await _hbService.GetStatsForBuilderAsync(id);
+        }
+
+        [HttpGet]
+        [Route("/homebuilders/{id}/pending-workorders")]
+        public async Task<List<WorkOrder>> GetPendingWorkOrdersAsync(int id)
+        {
+            return await _hbService.GetPendingWorkOrdersForBuilderAsync(id);
         }
     }
 }
