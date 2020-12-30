@@ -9,6 +9,7 @@ namespace HomeBuilders.Api.Services.Interfaces
         Task<List<WorkOrder>> GetWorkOrdersAsync();
         Task<WorkOrder> GetWorkOrderByIdAsync(int id);
         Task<WorkOrder> AddNewWorkOrderAsync(WorkOrder prospect);
-        Task<WorkOrder> UpdateExistingWorkOrder(WorkOrder WorkOrderToUpdate);
+        Task<WorkOrder> UpdateExistingWorkOrderAsync(WorkOrder WorkOrderToUpdate);
+        Task<List<WorkOrder>> GetWorkOrdersForBuilderAsync(int id);
     }
 }

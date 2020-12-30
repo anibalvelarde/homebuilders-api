@@ -9,6 +9,6 @@ namespace HomeBuilders.Api.Services.Interfaces
         Task<List<ServicePlan>> GetServicePlansAsync();
         Task<ServicePlan> GetServicePlanByIdAsync(int id);
         Task<ServicePlan> AddNewServicePlanAsync(ServicePlan prospect);
-        Task<ServicePlan> UpdateExistingServicePlan(ServicePlan ServicePlanToUpdate);
+        Task<ServicePlan> UpdateExistingServicePlanAsync(ServicePlan ServicePlanToUpdate);
     }
 }

@@ -9,6 +9,9 @@ namespace HomeBuilders.Api.Services.Interfaces
         Task<List<Client>> GetClientsAsync();
         Task<Client> GetClientByIdAsync(int id);
         Task<Client> AddNewClientAsync(Client prospect);
-        Task<Client> UpdateExistingClient(Client clientToUpdate);
+        Task<Client> UpdateExistingClientAsync(Client clientToUpdate);
+
+
+        Task<List<Client>> GetClientsForHomeBuilderAsync(int homeBuilderId);
     }
 }

@@ -9,6 +9,7 @@ namespace HomeBuilders.Api.Services.Interfaces
         Task<List<Employee>> GetEmployeesAsync();
         Task<Employee> GetEmployeeByIdAsync(int id);
         Task<Employee> AddNewEmployeeAsync(Employee prospect);
-        Task<Employee> UpdateExistingEmployee(Employee EmployeeToUpdate);
+        Task<Employee> UpdateExistingEmployeeAsync(Employee EmployeeToUpdate);
+        Task<List<Employee>> GetEmployeesForHomeBuilderAsync(int id);
     }
 }

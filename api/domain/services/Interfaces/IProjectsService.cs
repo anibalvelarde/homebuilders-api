@@ -9,6 +9,7 @@ namespace HomeBuilders.Api.Services.Interfaces
         Task<List<Project>> GetProjectsAsync();
         Task<Project> GetProjectByIdAsync(int id);
         Task<Project> AddNewProjectAsync(Project prospect);
-        Task<Project> UpdateExistingProject(Project ProjectToUpdate);
+        Task<Project> UpdateExistingProjectAsync(Project ProjectToUpdate);
+        Task<List<Project>> GetProjectsForHomeBuilderAsync(int id);
     }
 }
