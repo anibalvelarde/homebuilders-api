@@ -10,19 +10,25 @@ namespace HomeBuilders.Api.Services
 {
     public class EmployeesService : IEmployeesService
     {
-        public Task<Employee> AddNewEmployeeAsync(Employee prospect)
+        public Task<Employee> AddNewEmployeeAsync(Employee newHire)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new Employee(newHire));
         }
 
-        public Task<Employee> GetEmployeeByIdAsync(int id)
+        public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var employees = await this.GetEmployeesAsync();
+            return employees.Find(e => e.Id.Equals(id));
         }
 
         public Task<List<Employee>> GetEmployeesAsync()
         {
-            throw new NotImplementedException();
+            var employees = new List<Employee>();
+            for (int i = 0; i < 5; i++)
+            {
+                employees.Add(MakeFakeEmployee(i));
+            }
+            return Task.FromResult(employees);
         }
 
         public Task<List<Employee>> GetEmployeesForHomeBuilderAsync(int id)
@@ -35,20 +41,20 @@ namespace HomeBuilders.Api.Services
             return Task.FromResult(employees);
         }
 
-        public Task<Employee> UpdateExistingEmployeeAsync(Employee EmployeeToUpdate)
+        public Task<Employee> UpdateExistingEmployeeAsync(Employee employeeToUpdate)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(employeeToUpdate);
         }
 
         private Employee MakeFakeEmployee(int id, bool isForHomeBuilder = false)
         {
-            return new Employee()
+            var newHire = new Employee()
             {
-                Id = Guid.NewGuid(),
                 Name = $"Fake-EE-Name-{id}",
                 Role = id.Equals(0) ? EmployeeRole.CompanyOwner : EmployeeRole.AdminStaff,
                 Email = isForHomeBuilder ? $"hb-{id}-Email@hb.com" : "some-email@homebuilder.com"
             };
+            return new Employee(newHire);
         }
 
     }
