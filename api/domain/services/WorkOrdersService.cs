@@ -24,9 +24,28 @@ namespace HomeBuilders.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task<WorkOrder> UpdateExistingWorkOrder(WorkOrder WorkOrderToUpdate)
+        public Task<List<WorkOrder>> GetWorkOrdersForBuilderAsync(int id)
+        {
+            var workOrders = new List<WorkOrder>();
+            for (int i = 0; i < 5; i++)
+            {
+                workOrders.Add(MakeFakeWorkOrder(i));
+            }
+            return Task.FromResult(workOrders);
+        }
+
+        public Task<WorkOrder> UpdateExistingWorkOrderAsync(WorkOrder WorkOrderToUpdate)
         {
             throw new NotImplementedException();
         }
+
+        private WorkOrder MakeFakeWorkOrder(int id)
+        {
+            return new WorkOrder(Guid.NewGuid())
+            {
+                Description = $"Please, work on this issue {id}"
+            };
+        }
+
     }
 }

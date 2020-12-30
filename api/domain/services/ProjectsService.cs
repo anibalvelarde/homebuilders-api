@@ -4,11 +4,19 @@ using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using HomeBuilders.Api.Domain.Models.Enums;
 
 namespace HomeBuilders.Api.Services
 {
     public class ProjectsService : IProjectsService
     {
+        private readonly IClientsService _clientService;
+
+        public ProjectsService(IClientsService clientService)
+        {
+            _clientService = clientService;
+        }
+
         public Task<Project> AddNewProjectAsync(Project prospect)
         {
             throw new NotImplementedException();
@@ -24,9 +32,31 @@ namespace HomeBuilders.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task<Project> UpdateExistingProject(Project ProjectToUpdate)
+        public Task<Project> UpdateExistingProjectAsync(Project ProjectToUpdate)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<Project>> GetProjectsForHomeBuilderAsync(int builderId)
+        {
+            var projects = new List<Project>();
+            for (int i = 0; i < 5; i++)
+            {
+                projects.Add(await MakeFakeProject(i));
+            }
+            return projects;
+        }
+
+        private async Task<Project> MakeFakeProject(int id)
+        {
+            return new Project()
+            {
+                TemplateReferenceId = Guid.NewGuid(),
+                Type = ProjectType.Lodging,
+                Status = ProjectStatus.Organizing,
+                FinancingBy = $"Wings Financial (ID:{id})",
+                Owner = await _clientService.GetClientByIdAsync(id + 3)
+            };
         }
     }
 }

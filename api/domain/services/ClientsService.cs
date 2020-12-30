@@ -11,12 +11,13 @@ namespace HomeBuilders.Api.Services
     {
         public Task<Client> AddNewClientAsync(Client prospect)
         {
-            throw new NotImplementedException();
+            var newClient = new Client(prospect);
+            return Task.FromResult(newClient);
         }
 
         public Task<Client> GetClientByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(MakeFakeClient(id));
         }
 
         public Task<List<Client>> GetClientsAsync()
@@ -24,9 +25,32 @@ namespace HomeBuilders.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task<Client> UpdateExistingClient(Client clientToUpdate)
+        public Task<List<Client>> GetClientsForHomeBuilderAsync(int homeBuilderId)
+        {
+            var clients = new List<Client>();
+            for (int i = 0; i < 5; i++)
+            {
+                clients.Add(MakeFakeClient(i));
+            }
+            return Task.FromResult(clients);
+        }
+
+        public Task<Client> UpdateExistingClientAsync(Client clientToUpdate)
         {
             throw new NotImplementedException();
+        }
+
+        private Client MakeFakeClient(int fakeBuilderId)
+        {
+            return new Client()
+            {
+                Name = $"Fake name {fakeBuilderId}",
+                Address = $"Fake address for ID: {fakeBuilderId}",
+                Email = $"email-{fakeBuilderId}@server-{fakeBuilderId}.com",
+                Phone = $"867-5{fakeBuilderId}-5309",
+                WebAddress = $"www.server-{fakeBuilderId}.com"
+
+            };
         }
     }
 }

@@ -11,53 +11,51 @@ namespace HomeBuilders.Api.Services
     public class HomeBuildersService : IHomeBuildersService
     {
         private readonly Random _rnd = new Random();
-        public Task<IEnumerable<HomeBuilder>> GetHomeBuilderList()
+        private readonly IClientsService _clientService;
+        private readonly IProjectsService _projectService;
+        private readonly IEmployeesService _employeeService;
+        private readonly IWorkOrdersService _woService;
+
+        public HomeBuildersService(
+            IClientsService clientService,
+            IProjectsService projectService,
+            IEmployeesService employeesService,
+            IWorkOrdersService woService)
+        {
+            _clientService = clientService;
+            _projectService = projectService;
+            _employeeService = employeesService;
+            _woService = woService;
+        }
+
+        public Task<IEnumerable<HomeBuilder>> GetHomeBuilderListAsync()
         {
             return Task.FromResult(GetFakeHomeBuilders());
         }
-        public Task<HomeBuilder> GetHomeBuilderById(int id)
+        public Task<HomeBuilder> GetHomeBuilderByIdAsync(int id)
         {
             return Task.FromResult(GetFakeHomeBuilders().First(s => s.Id.Equals(id)));
         }
-        public Task<List<Client>> GetClientsForBuilder(int id)
+        public async Task<List<Client>> GetClientsForBuilderAsync(int id)
         {
-            var aBuilder = this.GetHomeBuilderById(id);
-            var clients = new List<Client>();
-            for (int i = 0; i < 5; i++)
-            {
-                clients.Add(MakeFakeClient(i));
-            }
-            return Task.FromResult(clients);
+            var aBuilder = this.GetHomeBuilderByIdAsync(id);
+            return await _clientService.GetClientsForHomeBuilderAsync(aBuilder.Id);
         }
-
-        public Task<List<Project>> GetProjectsForBuilder(int id)
+        public async Task<List<Project>> GetProjectsForBuilderAsync(int id)
         {
-            var aBuilder = this.GetHomeBuilderById(id);
-            var projects = new List<Project>();
-            for (int i = 0; i < 5; i++)
-            {
-                projects.Add(MakeFakeProject(i));
-            }
-            return Task.FromResult(projects);
+            var aBuilder = this.GetHomeBuilderByIdAsync(id);
+            return await _projectService.GetProjectsForHomeBuilderAsync(aBuilder.Id);
         }
-
-        public Task<List<Employee>> GetEmployeesForBuilder(int id)
+        public async Task<List<Employee>> GetEmployeesForBuilderAsync(int id)
         {
-            var aBuilder = this.GetHomeBuilderById(id);
-            var employees = new List<Employee>();
-            for (int i = 0; i < 5; i++)
-            {
-                employees.Add(MakeFakeEmployee(i));
-            }
-            return Task.FromResult(employees);
+            var aBuilder = this.GetHomeBuilderByIdAsync(id);
+            return await _employeeService.GetEmployeesForHomeBuilderAsync(aBuilder.Id);
         }
-
-        public Task<ServicePlan> GetServicePlansForBuilder(int id)
+        public Task<ServicePlan> GetServicePlansForBuilderAsync(int id)
         {
             return Task.FromResult(MakeFakeServicePlan(id));
         }
-
-        public Task<Stats> GetStatsForBuilder(int id)
+        public Task<Stats> GetStatsForBuilderAsync(int id)
         {
             var stats = new Stats()
             {
@@ -70,16 +68,10 @@ namespace HomeBuilders.Api.Services
             };
             return Task.FromResult(stats);
         }
-
-        public Task<List<WorkOrder>> GetPendingWorkOrdersForBuilder(int id)
+        public async Task<List<WorkOrder>> GetPendingWorkOrdersForBuilderAsync(int id)
         {
-            var aBuilder = this.GetHomeBuilderById(id);
-            var workOrders = new List<WorkOrder>();
-            for (int i = 0; i < 5; i++)
-            {
-                workOrders.Add(MakeFakeWorkOrder(i));
-            }
-            return Task.FromResult(workOrders);
+            var aBuilder = this.GetHomeBuilderByIdAsync(id);
+            return await _woService.GetWorkOrdersForBuilderAsync(aBuilder.Id);
         }
 
         private IEnumerable<HomeBuilder> GetFakeHomeBuilders()
@@ -90,13 +82,6 @@ namespace HomeBuilders.Api.Services
                 builders.Add(MakeFakeHomeBuilder(i));
             }
             return builders;
-        }
-        private WorkOrder MakeFakeWorkOrder(int id)
-        {
-            return new WorkOrder(Guid.NewGuid())
-            {
-                Description = $"Please, work on this issue {id}"
-            };
         }
         private ServicePlan MakeFakeServicePlan(int id)
         {
@@ -110,15 +95,6 @@ namespace HomeBuilders.Api.Services
                 PlanStatus = PlanStatus.Running
             };
         }
-        private Employee MakeFakeEmployee(int id)
-        {
-            return new Employee()
-            {
-                Id = Guid.NewGuid(),
-                Name = $"Fake-EE-Name-{id}",
-                Role = EmployeeRole.AdminStaff
-            };
-        }
         private HomeBuilder MakeFakeHomeBuilder(int id)
         {
             var dateStamp = DateTime.UtcNow;
@@ -130,29 +106,6 @@ namespace HomeBuilders.Api.Services
                 WebAddress = $"www.{dateStamp.ToString()}webserver.com",
                 Phone = $"555-555-1{DateTime.Now.Millisecond}",
                 Email = $"somebuilder@{dateStamp.ToString()}emailserver.com"
-            };
-        }
-        private Project MakeFakeProject(int id)
-        {
-            return new Project()
-            {
-                TemplateReferenceId = Guid.NewGuid(),
-                Type = ProjectType.Lodging,
-                Status = ProjectStatus.Organizing,
-                FinancingBy = $"Wings Financial (ID:{id})",
-                Owner = MakeFakeClient(id + 3)
-            };
-        }
-        private Client MakeFakeClient(int fakeBuilderId)
-        {
-            return new Client()
-            {
-                Name = $"Fake name {fakeBuilderId}",
-                Address = $"Fake address for ID: {fakeBuilderId}",
-                Email = $"email-{fakeBuilderId}@server-{fakeBuilderId}.com",
-                Phone = $"867-5{fakeBuilderId}-5309",
-                WebAddress = $"www.server-{fakeBuilderId}.com"
-
             };
         }
     }

@@ -24,7 +24,7 @@ namespace HomeBuilders.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServicePlan> UpdateExistingServicePlan(ServicePlan ServicePlanToUpdate)
+        public Task<ServicePlan> UpdateExistingServicePlanAsync(ServicePlan ServicePlanToUpdate)
         {
             throw new NotImplementedException();
         }

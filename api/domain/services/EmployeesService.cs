@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using HomeBuilders.Api.Domain.Models.Enums;
 
 namespace HomeBuilders.Api.Services
 {
@@ -24,9 +25,31 @@ namespace HomeBuilders.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task<Employee> UpdateExistingEmployee(Employee EmployeeToUpdate)
+        public Task<List<Employee>> GetEmployeesForHomeBuilderAsync(int id)
+        {
+            var employees = new List<Employee>();
+            for (int i = 0; i < 5; i++)
+            {
+                employees.Add(MakeFakeEmployee(i, isForHomeBuilder: true));
+            }
+            return Task.FromResult(employees);
+        }
+
+        public Task<Employee> UpdateExistingEmployeeAsync(Employee EmployeeToUpdate)
         {
             throw new NotImplementedException();
         }
+
+        private Employee MakeFakeEmployee(int id, bool isForHomeBuilder = false)
+        {
+            return new Employee()
+            {
+                Id = Guid.NewGuid(),
+                Name = $"Fake-EE-Name-{id}",
+                Role = id.Equals(0) ? EmployeeRole.CompanyOwner : EmployeeRole.AdminStaff,
+                Email = isForHomeBuilder ? $"hb-{id}-Email@hb.com" : "some-email@homebuilder.com"
+            };
+        }
+
     }
 }
