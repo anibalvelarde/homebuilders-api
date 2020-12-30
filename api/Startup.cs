@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using HomeBuilders.Api.AuxTypes;
 using HomeBuilders.Api.Services;
 using HomeBuilders.Api.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -41,11 +42,12 @@ namespace api.homebuilders
             // Note: Add this service at the end after AddMvc() or AddMvcCore().
             services.AddSwaggerGen(c =>
             {
+                (string dllName, string buildVersion) = GetDllInfo();
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "HomeBuilders API",
                     Version = "v1",
-                    Description = "API for Tracking Home Builder projects and Requests for follow-up.",
+                    Description = $"API for Tracking Home Builder projects and Requests for follow-up. Library:{dllName.ToUpper()}. Build:{buildVersion}",
                     Contact = new OpenApiContact
                     {
                         Name = "Anibal Velarde",
@@ -62,6 +64,12 @@ namespace api.homebuilders
             services.AddScoped<IWorkOrdersService, WorkOrdersService>();
             services.AddScoped<IEmployeesService, EmployeesService>();
             services.AddScoped<IServicePlansService, ServicePlansService>();
+        }
+
+        private (string dllName, string buildVersion) GetDllInfo()
+        {
+            AssemblyInfo info = new AssemblyInfo();
+            return (info.Product, info.AssemblyVersion);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
