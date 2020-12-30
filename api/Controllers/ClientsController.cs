@@ -46,7 +46,7 @@ namespace HomeBuilders.Api.Controllers
         [Route("/clients")]
         public async Task<Client> UpdateExistingClient([FromBody] ExistingClientRequest clientRequest)
         {
-            return await _service.UpdateExistingClient(clientRequest.ClientToUpdate);
+            return await _service.UpdateExistingClientAsync(clientRequest.ClientToUpdate);
         }
     }
 }

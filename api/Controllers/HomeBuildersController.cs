@@ -26,56 +26,56 @@ namespace HomeBuilders.Api.Controllers
         [Route("/homebuilders")]
         public async Task<IEnumerable<HomeBuilder>> GetHomeBuildersAsync()
         {
-            return await _hbService.GetHomeBuilderList();
+            return await _hbService.GetHomeBuilderListAsync();
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}")]
         public async Task<HomeBuilder> GetHomeBuilderByIdAsync(int id)
         {
-            return await _hbService.GetHomeBuilderById(id);
+            return await _hbService.GetHomeBuilderByIdAsync(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/clients")]
         public async Task<List<Client>> GetClientsAsync(int id)
         {
-            return await _hbService.GetClientsForBuilder(id);
+            return await _hbService.GetClientsForBuilderAsync(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/projects")]
         public async Task<List<Project>> GetProjectsAsync(int id)
         {
-            return await _hbService.GetProjectsForBuilder(id);
+            return await _hbService.GetProjectsForBuilderAsync(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/employees")]
         public async Task<List<Employee>> GetEmployeesAsync(int id)
         {
-            return await _hbService.GetEmployeesForBuilder(id);
+            return await _hbService.GetEmployeesForBuilderAsync(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/service-plan")]
         public async Task<ServicePlan> GetServicePlanAsync(int id)
         {
-            return await _hbService.GetServicePlansForBuilder(id);
+            return await _hbService.GetServicePlansForBuilderAsync(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/stats")]
         public async Task<Stats> GetStatsAsync(int id)
         {
-            return await _hbService.GetStatsForBuilder(id);
+            return await _hbService.GetStatsForBuilderAsync(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/pending-workorders")]
         public async Task<List<WorkOrder>> GetPendingWorkOrdersAsync(int id)
         {
-            return await _hbService.GetPendingWorkOrdersForBuilder(id);
+            return await _hbService.GetPendingWorkOrdersForBuilderAsync(id);
         }
     }
 }

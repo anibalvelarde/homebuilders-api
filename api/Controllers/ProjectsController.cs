@@ -46,7 +46,7 @@ namespace HomeBuilders.Api.Controllers
         [Route("/projects")]
         public async Task<Project> UpdateExistingProject([FromBody] ExistingProjectRequest ProjectRequest)
         {
-            return await _service.UpdateExistingProject(ProjectRequest.ProjectToUpdate);
+            return await _service.UpdateExistingProjectAsync(ProjectRequest.ProjectToUpdate);
         }
     }
 }

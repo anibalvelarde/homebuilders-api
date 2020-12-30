@@ -46,7 +46,7 @@ namespace HomeBuilders.Api.Controllers
         [Route("/Employees")]
         public async Task<Employee> UpdateExistingEmployee([FromBody] ExistingEmployeeRequest EmployeeRequest)
         {
-            return await _service.UpdateExistingEmployee(EmployeeRequest.EmployeeToUpdate);
+            return await _service.UpdateExistingEmployeeAsync(EmployeeRequest.EmployeeToUpdate);
         }
     }
 }

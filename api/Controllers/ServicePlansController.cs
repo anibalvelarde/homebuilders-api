@@ -46,7 +46,7 @@ namespace HomeBuilders.Api.Controllers
         [Route("/ServicePlans")]
         public async Task<ServicePlan> UpdateExistingServicePlan([FromBody] ExistingServicePlanRequest ServicePlanRequest)
         {
-            return await _service.UpdateExistingServicePlan(ServicePlanRequest.ServicePlanToUpdate);
+            return await _service.UpdateExistingServicePlanAsync(ServicePlanRequest.ServicePlanToUpdate);
         }
     }
 }

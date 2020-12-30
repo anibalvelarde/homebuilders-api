@@ -46,7 +46,7 @@ namespace HomeBuilders.Api.Controllers
         [Route("/WorkOrders")]
         public async Task<WorkOrder> UpdateExistingWorkOrder([FromBody] ExistingWorkOrderRequest WorkOrderRequest)
         {
-            return await _service.UpdateExistingWorkOrder(WorkOrderRequest.WorkOrderToUpdate);
+            return await _service.UpdateExistingWorkOrderAsync(WorkOrderRequest.WorkOrderToUpdate);
         }
     }
 }
