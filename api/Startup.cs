@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using HomeBuilders.Api.Services;
 using HomeBuilders.Api.Services.Interfaces;
@@ -29,6 +30,12 @@ namespace api.homebuilders
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                });
 
             // Register the Swagger Generator service. This service is responsible for genrating Swagger Documents.
             // Note: Add this service at the end after AddMvc() or AddMvcCore().
@@ -46,6 +53,7 @@ namespace api.homebuilders
                         Url = new Uri("http://anibalvelarde.com/"),
                     },
                 });
+                c.DescribeAllEnumsAsStrings();
             });
 
             // Dependencies

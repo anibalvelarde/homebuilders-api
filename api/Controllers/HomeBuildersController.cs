@@ -40,42 +40,42 @@ namespace HomeBuilders.Api.Controllers
         [Route("/homebuilders/{id}/clients")]
         public async Task<List<Client>> GetClientsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _hbService.GetClientsForBuilder(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/projects")]
         public async Task<List<Project>> GetProjectsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _hbService.GetProjectsForBuilder(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/employees")]
         public async Task<List<Employee>> GetEmployeesAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _hbService.GetEmployeesForBuilder(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/service-plan")]
         public async Task<ServicePlan> GetServicePlanAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _hbService.GetServicePlansForBuilder(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/stats")]
         public async Task<Stats> GetStatsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _hbService.GetStatsForBuilder(id);
         }
 
         [HttpGet]
         [Route("/homebuilders/{id}/pending-workorders")]
-        public async Task<Stats> GetPendingWorkOrdersAsync(int id)
+        public async Task<List<WorkOrder>> GetPendingWorkOrdersAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _hbService.GetPendingWorkOrdersForBuilder(id);
         }
     }
 }

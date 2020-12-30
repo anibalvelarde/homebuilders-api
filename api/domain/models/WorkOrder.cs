@@ -17,7 +17,7 @@ namespace HomeBuilders.Api.Domain.Models
         public DateTime RequestedOn { get; private set; }
         public string Description { get; set; }
         public List<string> Responses { get; set; }
-        public DateTime CompletedByBuilderOn { get; set; }
-        public DateTime AcceptedByClientOn { get; set; }
+        public DateTime? CompletedByBuilderOn { get; set; }
+        public DateTime? AcceptedByClientOn { get; set; }
     }
 }
