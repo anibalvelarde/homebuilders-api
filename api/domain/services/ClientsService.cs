@@ -22,7 +22,12 @@ namespace HomeBuilders.Api.Services
 
         public Task<List<Client>> GetClientsAsync()
         {
-            throw new NotImplementedException();
+            var clients = new List<Client>();
+            for (int i = 0; i < 5; i++)
+            {
+                clients.Add(MakeFakeClient(i));
+            }
+            return Task.FromResult(clients);
         }
 
         public Task<List<Client>> GetClientsForHomeBuilderAsync(int homeBuilderId)
@@ -37,7 +42,7 @@ namespace HomeBuilders.Api.Services
 
         public Task<Client> UpdateExistingClientAsync(Client clientToUpdate)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(clientToUpdate);
         }
 
         private Client MakeFakeClient(int fakeBuilderId)
