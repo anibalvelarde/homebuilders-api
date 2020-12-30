@@ -11,13 +11,15 @@ namespace HomeBuilders.Api.Services
     public class ProjectsService : IProjectsService
     {
         private readonly IClientsService _clientService;
+        private readonly IEmployeesService _employeeService;
 
-        public ProjectsService(IClientsService clientService)
+        public ProjectsService(IClientsService clientService, IEmployeesService empService)
         {
             _clientService = clientService;
+            _employeeService = empService;
         }
 
-        public Task<Project> AddNewProjectAsync(Project prospect)
+        public Task<Project> AddNewProjectAsync(Project prospect, HomeBuilder builder, Client owner)
         {
             throw new NotImplementedException();
         }

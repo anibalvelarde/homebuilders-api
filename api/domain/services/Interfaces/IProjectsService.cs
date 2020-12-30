@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HomeBuilders.Api.Domain.Models;
@@ -8,7 +9,7 @@ namespace HomeBuilders.Api.Services.Interfaces
     {
         Task<List<Project>> GetProjectsAsync();
         Task<Project> GetProjectByIdAsync(int id);
-        Task<Project> AddNewProjectAsync(Project prospect);
+        Task<Project> AddNewProjectAsync(Project prospect, HomeBuilder builder, Client owner);
         Task<Project> UpdateExistingProjectAsync(Project ProjectToUpdate);
         Task<List<Project>> GetProjectsForHomeBuilderAsync(int id);
     }
