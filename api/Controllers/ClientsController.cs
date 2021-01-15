@@ -43,7 +43,7 @@ namespace HomeBuilders.Api.Controllers
         }
 
         [HttpPut]
-        [Route("/clients")]
+        [Route("/clients/{di}")]
         public async Task<Client> UpdateExistingClient([FromBody] ExistingClientRequest clientRequest)
         {
             return await _service.UpdateExistingClientAsync(clientRequest.ClientToUpdate);
