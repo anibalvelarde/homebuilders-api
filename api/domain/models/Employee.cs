@@ -19,7 +19,10 @@ namespace HomeBuilders.Api.Domain.Models
                 Role = newHire.Role;
                 CreatedOn = DateTime.UtcNow;
             }
-            throw new InvalidOperationException($"Employee instance is not a new hire. ID: {newHire.Id}");
+            else
+            {
+                throw new InvalidOperationException($"Employee instance is not a new hire. ID: {newHire.Id}");
+            }
         }
 
         public Guid Id { get; private set; }
