@@ -6,23 +6,27 @@ namespace HomeBuilders.Api.Domain.Models
     {
         public Client()
         {
-            SetupNew();
+            Id = Guid.Empty;
+            CreatedOn = DateTime.MinValue;
         }
 
         public Client(Client prospect)
         {
             if (prospect.Id.Equals(Guid.Empty) &&
-               prospect.CreatedOn.Equals(DateTime.MinValue)
-               )
+               prospect.CreatedOn.Equals(DateTime.MinValue))
             {
-                SetupNew();
+                Id = Guid.NewGuid();
+                CreatedOn = DateTime.UtcNow;
                 Name = prospect.Name;
                 Address = prospect.Address;
                 Email = prospect.Email;
                 Phone = prospect.Phone;
                 WebAddress = prospect.WebAddress;
             }
-            throw new InvalidOperationException($"Client instance is not a prospect. ID: {prospect.Id}");
+            else
+            {
+                throw new InvalidOperationException($"Client instance is not a prospect. ID: {prospect.Id}");
+            }
         }
 
         public static Client NewProspect(string name, string address, string email, string phone, string webAddress)
@@ -45,11 +49,5 @@ namespace HomeBuilders.Api.Domain.Models
         public string Phone { get; set; }
         public string WebAddress { get; set; }
         public DateTime CreatedOn { get; private set; }
-
-        private void SetupNew()
-        {
-            Id = Guid.NewGuid();
-            CreatedOn = DateTime.UtcNow;
-        }
     }
 }

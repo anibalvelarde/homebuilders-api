@@ -15,9 +15,9 @@ namespace HomeBuilders.Api.Services
             return Task.FromResult(newClient);
         }
 
-        public Task<Client> GetClientByIdAsync(int id)
+        public Task<Client> GetClientByIdAsync(Guid id)
         {
-            return Task.FromResult(MakeFakeClient(id));
+            return Task.FromResult(MakeFakeClient(DateTime.Now.Millisecond));
         }
 
         public Task<List<Client>> GetClientsAsync()
@@ -35,7 +35,7 @@ namespace HomeBuilders.Api.Services
             var clients = new List<Client>();
             for (int i = 0; i < 5; i++)
             {
-                clients.Add(MakeFakeClient(i));
+                clients.Add(MakeFakeClient(i + 1));
             }
             return Task.FromResult(clients);
         }
@@ -47,15 +47,15 @@ namespace HomeBuilders.Api.Services
 
         private Client MakeFakeClient(int fakeBuilderId)
         {
-            return new Client()
+            var aClient = new Client()
             {
                 Name = $"Fake name {fakeBuilderId}",
                 Address = $"Fake address for ID: {fakeBuilderId}",
                 Email = $"email-{fakeBuilderId}@server-{fakeBuilderId}.com",
                 Phone = $"867-5{fakeBuilderId}-5309",
                 WebAddress = $"www.server-{fakeBuilderId}.com"
-
             };
+            return new Client(aClient);
         }
     }
 }

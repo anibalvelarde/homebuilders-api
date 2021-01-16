@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HomeBuilders.Api.Domain.Models;
@@ -30,7 +31,7 @@ namespace HomeBuilders.Api.Controllers
 
         [HttpGet]
         [Route("/clients/{id}")]
-        public async Task<Client> GetClientById(int id)
+        public async Task<Client> GetClientById(Guid id)
         {
             return await _service.GetClientByIdAsync(id);
         }

@@ -57,7 +57,7 @@ namespace HomeBuilders.Api.Services
                 Type = ProjectType.Lodging,
                 Status = ProjectStatus.Organizing,
                 FinancingBy = $"Wings Financial (ID:{id})",
-                Owner = await _clientService.GetClientByIdAsync(id + 3)
+                Owner = await _clientService.GetClientByIdAsync(Guid.NewGuid())
             };
         }
     }
