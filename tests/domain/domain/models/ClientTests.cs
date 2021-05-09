@@ -3,43 +3,41 @@ using HomeBuilders.Api.Domain.Models;
 using HomeBuilders.Api.Domain.Models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HomeBuilders.Tests.Domain.Models
+namespace HomeBuilders.Tests.Api.Domain.Models
 {
     [TestClass]
-    public class EmployeeTests
+    public class ClientTests
     {
         [TestMethod]
-        public void Should_Throw_When_Creating_Instance_For_Non_NewHire()
+        public void Should_Throw_When_Creating_Instance_For_Non_Prospect()
         {
             // arrange
-            var realNewHire = new Employee()
+            var realProspect = new Client()
             {
                 Name = $"Fake-EE-Name-{DateTime.Now.Millisecond}",
-                Role = EmployeeRole.AdminStaff,
                 Email = "some-email@homebuilder.com"
             };
-            var alreadyAnEmployee = new Employee(realNewHire);
+            var alreadyClient = new Client(realProspect);
 
             // act & assert
-            Assert.ThrowsException<InvalidOperationException>(() => new Employee(alreadyAnEmployee));
+            Assert.ThrowsException<InvalidOperationException>(() => new Client(alreadyClient));
         }
 
         [TestMethod]
-        public void Should_Be_Correct_When_Creating_Instance_For_NewHire()
+        public void Should_Be_Correct_When_Creating_Instance_For_Prospect()
         {
             // arrange
-            var realNewHire = new Employee()
+            var realNewHire = new Client()
             {
                 Name = $"Fake-EE-Name-{DateTime.Now.Millisecond}",
-                Role = EmployeeRole.AdminStaff,
                 Email = "some-email@homebuilder.com"
             };
 
             // act
-            var anEmployee = new Employee(realNewHire);
+            var anClient = new Client(realNewHire);
 
             // assert
-            Assert.IsInstanceOfType(anEmployee, typeof(Employee));
+            Assert.IsInstanceOfType(anClient, typeof(Client));
         }
     }
 }
