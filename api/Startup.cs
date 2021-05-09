@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -55,6 +57,10 @@ namespace api.homebuilders
                         Url = new Uri("http://anibalvelarde.com/"),
                     },
                 });
+                foreach (var filePath in System.IO.Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)), "*.xml"))
+                {
+                    c.IncludeXmlComments(filePath);
+                }
             });
 
             // Dependencies

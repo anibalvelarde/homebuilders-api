@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace HomeBuilders.Api.Controllers
 {
+    /// <summary>
+    /// Maintains information about Clients
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class ClientsController
@@ -22,6 +25,10 @@ namespace HomeBuilders.Api.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Gets all the clients in the system. 
+        /// </summary>
+        /// <returns>List of <c>Client</c> elements.</returns>
         [HttpGet]
         [Route("/clients")]
         public async Task<List<Client>> GetClientsAsync()
@@ -29,6 +36,11 @@ namespace HomeBuilders.Api.Controllers
             return await _service.GetClientsAsync();
         }
 
+        /// <summary>
+        /// Gets a single Client from the list of clients in the system.
+        /// </summary>
+        /// <param name="id">Unique identifier for a Client</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("/clients/{id}")]
         public async Task<Client> GetClientById(Guid id)

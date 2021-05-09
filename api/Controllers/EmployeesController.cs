@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace HomeBuilders.Api.Controllers
 {
+    /// <summary>
+    /// Maintains information about Employees
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class EmployeesController
