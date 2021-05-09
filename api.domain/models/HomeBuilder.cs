@@ -4,11 +4,13 @@ namespace HomeBuilders.Api.Domain.Models
 {
     public class HomeBuilder
     {
+        public HomeBuilder()
+        { }
         public HomeBuilder(int id)
         {
             Id = id;
         }
-        public int Id {get; private set;}
+        public int Id { get; private set; }
         /// <summary>
         /// Name of the company (e.g. LLC, LLP, Inc., etc)
         /// </summary>
@@ -18,7 +20,7 @@ namespace HomeBuilders.Api.Domain.Models
         /// Address of the home builder's company
         /// </summary>
         /// <value></value>
-        public string Address{ get; set; }
+        public string Address { get; set; }
         /// <summary>
         /// Better Business Bureau Identifier
         /// </summary>
@@ -48,6 +50,6 @@ namespace HomeBuilders.Api.Domain.Models
         /// Builder's employees
         /// </summary>
         /// <value></value>
-        public List<Employee> Employees { get; set;}
+        public List<Employee> Employees { get; set; }
     }
 }
