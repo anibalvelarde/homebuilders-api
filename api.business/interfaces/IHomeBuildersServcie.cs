@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HomeBuilders.Api.Domain.Models;
+using api.domain.models;
 
-namespace HomeBuilders.Api.Services.Interfaces
+namespace api.business.interfaces
 {
     public interface IHomeBuildersService
     {

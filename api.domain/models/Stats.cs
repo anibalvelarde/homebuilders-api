@@ -1,4 +1,4 @@
-namespace HomeBuilders.Api.Domain.Models
+namespace api.domain.models
 {
     public class Stats
     {

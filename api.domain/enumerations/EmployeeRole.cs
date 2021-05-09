@@ -1,4 +1,4 @@
-namespace HomeBuilders.Api.Domain.Models.Enums
+namespace api.domain.models.Enums
 {
     public enum EmployeeRole
     {

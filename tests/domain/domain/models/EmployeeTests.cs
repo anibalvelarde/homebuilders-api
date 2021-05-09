@@ -1,6 +1,6 @@
 using System;
-using HomeBuilders.Api.Domain.Models;
-using HomeBuilders.Api.Domain.Models.Enums;
+using api.domain.models;
+using api.domain.models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HomeBuilders.Tests.Api.Domain.Models

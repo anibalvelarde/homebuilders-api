@@ -1,4 +1,4 @@
-using HomeBuilders.Api.Domain.Models;
+using api.domain.models;
 
 namespace HomeBuilders.Api.Requests
 {

@@ -8,12 +8,11 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="5.6.3" />
-    <PackageReference Include="Neo4j.Driver" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\api.domain\api.domain.homebuilders.csproj" />
-    <ProjectReference Include="..\api.business\api.business.homebuilders.csproj" />
+    <ProjectReference Include="..\api.domain\api.domain.csproj" />
+    <ProjectReference Include="..\api.business\api.business.csproj" />
   </ItemGroup>
 
 

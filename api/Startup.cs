@@ -1,24 +1,17 @@
 using System;
 using System.IO;
 using System.Reflection;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using HomeBuilders.Api.AuxTypes;
-using HomeBuilders.Api.Services;
-using HomeBuilders.Api.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using api.business.extensions;
 
-namespace api.homebuilders
+namespace HomeBuilders.Api
 {
     public class Startup
     {
@@ -63,13 +56,8 @@ namespace api.homebuilders
                 }
             });
 
-            // Dependencies
-            services.AddScoped<IHomeBuildersService, HomeBuildersService>();
-            services.AddScoped<IClientsService, ClientsService>();
-            services.AddScoped<IProjectsService, ProjectsService>();
-            services.AddScoped<IWorkOrdersService, WorkOrdersService>();
-            services.AddScoped<IEmployeesService, EmployeesService>();
-            services.AddScoped<IServicePlansService, ServicePlansService>();
+            // Adding Business Layer Dependencies
+            services.SetupBusinessDependencies();
         }
 
         private (string dllName, string buildVersion) GetDllInfo()

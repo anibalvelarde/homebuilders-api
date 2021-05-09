@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.homebuilders", "api\api.homebuilders.csproj", "{AF8E9F17-7C1B-4A91-AC2F-2DB4C37AD589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.business.homebuilders", "api.business\api.business.homebuilders.csproj", "{8DAF5654-4325-40A8-B13B-4607414F472D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.business.homebuilders", "api.business\api.business.csproj", "{8DAF5654-4325-40A8-B13B-4607414F472D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.domain.homebuilders", "api.domain\api.domain.homebuilders.csproj", "{ABCEB6EC-E982-441D-B8F2-96BA72C2F539}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.domain.homebuilders", "api.domain\api.domain.csproj", "{ABCEB6EC-E982-441D-B8F2-96BA72C2F539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.data.homebuilders", "api.data\api.data.homebuilders.csproj", "{F413FF00-7905-4251-ABBF-D08F3BD86592}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.data.homebuilders", "api.data\api.data.csproj", "{F413FF00-7905-4251-ABBF-D08F3BD86592}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{806C5267-195B-4813-8CB2-DDE6B80E7845}"
 EndProject

@@ -1,6 +1,6 @@
 using System;
 
-namespace HomeBuilders.Api.Domain.Models
+namespace api.domain.models
 {
     public class Step
     {
@@ -10,6 +10,6 @@ namespace HomeBuilders.Api.Domain.Models
         public Enums.TimeUnit DurationTimeUnit { get; set; }
         public DateTime EstimatedCompletionDate { get; set; }
         public int DaysToComplete { get; set; }
-        public DateTime ActualCompletionDate { get; set;}
+        public DateTime ActualCompletionDate { get; set; }
     }
 }

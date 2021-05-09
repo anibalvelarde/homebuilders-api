@@ -1,12 +1,12 @@
-using HomeBuilders.Api.Services.Interfaces;
-using HomeBuilders.Api.Domain.Models;
+using api.business.interfaces;
+using api.domain.models;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
-using HomeBuilders.Api.Domain.Models.Enums;
+using api.domain.models.Enums;
 
-namespace HomeBuilders.Api.Services
+namespace api.business.services
 {
     public class ProjectsService : IProjectsService
     {

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\api.data\api.data.homebuilders.csproj" />
+    <ProjectReference Include="..\..\api.data\api.data.csproj" />
   </ItemGroup>
 
 </Project>

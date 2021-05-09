@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeBuilders.Api.Domain.Models;
+using api.domain.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using HomeBuilders.Api.Services.Interfaces;
+using api.business.interfaces;
 
 namespace HomeBuilders.Api.Controllers
 {

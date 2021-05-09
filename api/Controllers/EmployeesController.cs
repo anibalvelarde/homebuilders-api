@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HomeBuilders.Api.Domain.Models;
+using api.domain.models;
 using HomeBuilders.Api.Requests;
-using HomeBuilders.Api.Services.Interfaces;
+using api.business.interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

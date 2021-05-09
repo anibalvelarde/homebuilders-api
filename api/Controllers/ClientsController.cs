@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HomeBuilders.Api.Domain.Models;
+using api.domain.models;
 using HomeBuilders.Api.Requests;
-using HomeBuilders.Api.Services.Interfaces;
+using api.business.interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -19,6 +19,11 @@ namespace HomeBuilders.Api.Controllers
         private ILogger<ClientsController> _logger;
         private IClientsService _service;
 
+        /// <summary>
+        /// API Controller for "clients" REST resource
+        /// </summary>
+        /// <param name="logger">ILogger implementation</param>
+        /// <param name="service">Backend service provider for "client" access services</param>
         public ClientsController(ILogger<ClientsController> logger, IClientsService service)
         {
             _logger = logger;
@@ -48,6 +53,11 @@ namespace HomeBuilders.Api.Controllers
             return await _service.GetClientByIdAsync(id);
         }
 
+        /// <summary>
+        /// Adds a new "client" resource
+        /// </summary>
+        /// <param name="clientRequest">A well-formed NewClientRequest</param>
+        /// <returns>An instance of the client resource that was just recently created</returns>
         [HttpPost]
         [Route("/clients")]
         public async Task<Client> AddNewClient([FromBody] NewClientRequest clientRequest)
@@ -55,6 +65,11 @@ namespace HomeBuilders.Api.Controllers
             return await _service.AddNewClientAsync(clientRequest.Prospect);
         }
 
+        /// <summary>
+        /// Updates all attributes of a client resource
+        /// </summary>
+        /// <param name="clientRequest">A well-formed ExistingClientRequest</param>
+        /// <returns>An instance of the client resource that was just recently udated</returns>
         [HttpPut]
         [Route("/clients/{di}")]
         public async Task<Client> UpdateExistingClient([FromBody] ExistingClientRequest clientRequest)

@@ -1,14 +1,19 @@
-using HomeBuilders.Api.Services.Interfaces;
-using HomeBuilders.Api.Domain.Models;
+using api.business.interfaces;
+using api.domain.models;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
-using System.Linq;
+using api.data.interfaces;
 
-namespace HomeBuilders.Api.Services
+namespace api.business.services
 {
     public class ClientsService : IClientsService
     {
+        private readonly IDbDriver _dbDriver;
+        public ClientsService(IDbDriver dbDriver)
+        {
+
+        }
         public Task<Client> AddNewClientAsync(Client prospect)
         {
             var newClient = new Client(prospect);

@@ -1,6 +1,6 @@
 using System;
 
-namespace HomeBuilders.Api.Domain.Models
+namespace api.domain.models
 {
     public class PlatformStepTemplate
     {
@@ -10,9 +10,9 @@ namespace HomeBuilders.Api.Domain.Models
             CreatedOn = DateTime.UtcNow;
         }
 
-        public Guid Id {get; private set;}
-        public string Title {get; set;}
-        public string Description {get; set;}
-        public DateTime CreatedOn {get; private set;}
+        public Guid Id { get; private set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime CreatedOn { get; private set; }
     }
 }
