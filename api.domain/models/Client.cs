@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace api.domain.models
 {
+    /// <summary>
+    /// Describes a business (a client) that needs to be defined in the system.
+    /// </summary>
     public class Client
     {
         public Client()
