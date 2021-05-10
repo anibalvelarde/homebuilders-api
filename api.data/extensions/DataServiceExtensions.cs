@@ -1,3 +1,5 @@
+using api.data.interfaces;
+using api.data.serivices;
 using Microsoft.Extensions.DependencyInjection;
 using Neo4j.Driver;
 
@@ -15,8 +17,9 @@ namespace api.data.extensions
                 var bolt = $"{usrName}://localhost:7687";
                 var authToken = AuthTokens.Basic(usrName, pswd);
 
-                return GraphDatabase.Driver(url, authToken);
+                return GraphDatabase.Driver(bolt, authToken);
             });
+            services.AddScoped<IClientDataProvider, ClientDataProvider>();
         }
     }
 }
