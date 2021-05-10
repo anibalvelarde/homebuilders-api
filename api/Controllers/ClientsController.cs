@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using api.domain.models;
 using HomeBuilders.Api.Requests;
 using api.business.interfaces;
@@ -33,12 +34,13 @@ namespace HomeBuilders.Api.Controllers
         /// <summary>
         /// Gets all the clients in the system. 
         /// </summary>
-        /// <returns>List of <c>Client</c> elements.</returns>
+        /// <returns>IEnumerable of <c>Client</c> elements.</returns>
         [HttpGet]
         [Route("/clients")]
-        public async Task<List<Client>> GetClientsAsync()
+        public async Task<IEnumerable<Client>> GetClientsAsync()
         {
-            return await _service.GetClientsAsync();
+            var result = await _service.GetClientsAsync();
+            return result.AsEnumerable();
         }
 
         /// <summary>
