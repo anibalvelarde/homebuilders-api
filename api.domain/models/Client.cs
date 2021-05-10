@@ -54,6 +54,15 @@ namespace api.domain.models
             WebAddress = Convert.ToString(dbWebAddress);
         }
 
+        /// <summary>
+        /// Instantiating a Prospect. No ID (Guid) is generated for a prospect.
+        /// </summary>
+        /// <param name="name">the Name of the prospect</param>
+        /// <param name="address">the street Address for the prospect</param>
+        /// <param name="email">the Email for the prospect</param>
+        /// <param name="phone">the Phone for the prospect</param>
+        /// <param name="webAddress">the URL for prospect</param>
+        /// <returns></returns>
         public static Client NewProspect(string name, string address, string email, string phone, string webAddress)
         {
             var p = new Client();
@@ -67,13 +76,45 @@ namespace api.domain.models
             return p;
         }
 
+        /// <summary>
+        /// Unique identifier (Guid)
+        /// </summary>
+        /// <value></value>
         public Guid Id { get; private set; }
+        /// <summary>
+        /// Name of the business
+        /// </summary>
+        /// <value></value>
         public string Name { get; set; }
+        /// <summary>
+        /// Address where business is located
+        /// </summary>
+        /// <value></value>
         public string Address { get; set; }
+        /// <summary>
+        /// State where the business HQ are located
+        /// </summary>
+        /// <value></value>
         public string State { get; set; }
+        /// <summary>
+        /// Preferred Email address to receive general email communications
+        /// </summary>
+        /// <value></value>
         public string Email { get; set; }
+        /// <summary>
+        /// Main Phone number for the business
+        /// </summary>
+        /// <value></value>
         public string Phone { get; set; }
+        /// <summary>
+        /// URL for the business. Write "none" if no website is available.
+        /// </summary>
+        /// <value></value>
         public string WebAddress { get; set; }
+        /// <summary>
+        /// Date when the HomeBuilders record was created
+        /// </summary>
+        /// <value></value>
         public DateTime CreatedOn { get; private set; }
     }
 }
