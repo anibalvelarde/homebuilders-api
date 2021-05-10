@@ -13,7 +13,6 @@ namespace api.data.extensions
             {
                 var usrName = "neo4j";
                 var pswd = "test";
-                var url = "http://localhost:7474";
                 var bolt = $"{usrName}://localhost:7687";
                 var authToken = AuthTokens.Basic(usrName, pswd);
 
