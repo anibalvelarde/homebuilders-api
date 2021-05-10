@@ -9,11 +9,12 @@ namespace api.business.services
 {
     public class ClientsService : IClientsService
     {
-        private readonly IDbDriver _dbDriver;
-        public ClientsService(IDbDriver dbDriver)
+        private readonly IClientDataProvider _dataProvider;
+        public ClientsService(IClientDataProvider provider)
         {
-
+            _dataProvider = provider;
         }
+
         public Task<Client> AddNewClientAsync(Client prospect)
         {
             var newClient = new Client(prospect);
@@ -25,14 +26,9 @@ namespace api.business.services
             return Task.FromResult(MakeFakeClient(DateTime.Now.Millisecond));
         }
 
-        public Task<List<Client>> GetClientsAsync()
+        public async Task<List<Client>> GetClientsAsync()
         {
-            var clients = new List<Client>();
-            for (int i = 0; i < 5; i++)
-            {
-                clients.Add(MakeFakeClient(i));
-            }
-            return Task.FromResult(clients);
+            return await _dataProvider.FetchAllClientsAsync();
         }
 
         public Task<List<Client>> GetClientsForHomeBuilderAsync(int homeBuilderId)
