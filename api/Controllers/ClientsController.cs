@@ -36,7 +36,6 @@ namespace HomeBuilders.Api.Controllers
         /// </summary>
         /// <returns>IEnumerable of <c>Client</c> elements.</returns>
         [HttpGet]
-        [Route("/clients")]
         public async Task<IEnumerable<Client>> GetClientsAsync()
         {
             var result = await _service.GetClientsAsync();
@@ -48,11 +47,21 @@ namespace HomeBuilders.Api.Controllers
         /// </summary>
         /// <param name="id">Unique identifier for a Client</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("/clients/{id}")]
+        [HttpGet("{id:Guid}")]
         public async Task<Client> GetClientById(Guid id)
         {
             return await _service.GetClientByIdAsync(id);
+        }
+
+        /// <summary>
+        /// Gets a list of Clients that match the name pattern.
+        /// </summary>
+        /// <param name="namePattern"></param>
+        /// <returns></returns>
+        [HttpGet("{namePattern}")]
+        public async Task<IEnumerable<Client>> SearchClientByName(string namePattern)
+        {
+            return await _service.SearchClientByNameAsync(namePattern);
         }
 
         /// <summary>

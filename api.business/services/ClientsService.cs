@@ -21,15 +21,21 @@ namespace api.business.services
             return Task.FromResult(newClient);
         }
 
-        public Task<Client> GetClientByIdAsync(Guid id)
+        public async Task<Client> GetClientByIdAsync(Guid id)
         {
-            return Task.FromResult(MakeFakeClient(DateTime.Now.Millisecond));
+            return await _dataProvider.FetchClientByIdAsync(id);
         }
 
         public async Task<List<Client>> GetClientsAsync()
         {
             return await _dataProvider.FetchAllClientsAsync();
         }
+
+        public async Task<IEnumerable<Client>> SearchClientByNameAsync(string namePattern)
+        {
+            return await _dataProvider.SearchClientsByNameAsync(namePattern);
+        }
+
 
         public Task<List<Client>> GetClientsForHomeBuilderAsync(int homeBuilderId)
         {

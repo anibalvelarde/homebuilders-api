@@ -14,5 +14,6 @@ namespace api.business.interfaces
 
 
         Task<List<Client>> GetClientsForHomeBuilderAsync(int homeBuilderId);
+        Task<IEnumerable<Client>> SearchClientByNameAsync(string namePattern);
     }
 }

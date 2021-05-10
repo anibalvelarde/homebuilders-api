@@ -44,7 +44,14 @@ namespace api.domain.models
             props.TryGetValue("email", out object dbEmail);
             props.TryGetValue("webAddress", out object dbWebAddress);
 
-            Id = new Guid(Convert.ToString(dbId));
+            if (Guid.TryParse(Convert.ToString(dbId), out Guid tempGuid))
+            {
+                Id = tempGuid;
+            }
+            else
+            {
+                Id = Guid.Empty;
+            }
             CreatedOn = Convert.ToDateTime(dbDate);
             Name = Convert.ToString(dbName);
             Address = Convert.ToString(dbAddress);
