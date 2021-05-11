@@ -79,13 +79,27 @@ namespace HomeBuilders.Api.Controllers
         /// <summary>
         /// Updates all attributes of a client resource
         /// </summary>
+        /// <param name="id">Unique identifier for a Client</param>
         /// <param name="clientRequest">A well-formed ExistingClientRequest</param>
         /// <returns>An instance of the client resource that was just recently udated</returns>
         [HttpPut]
-        [Route("/clients/{di}")]
-        public async Task<Client> UpdateExistingClient([FromBody] ExistingClientRequest clientRequest)
+        [Route("/clients/{id}")]
+        public async Task<Client> UpdateExistingClient([FromRoute] Guid id, [FromBody] ExistingClientRequest clientRequest)
         {
-            return await _service.UpdateExistingClientAsync(clientRequest.ClientToUpdate);
+            return await _service.UpdateExistingClientAsync(id, clientRequest.ClientToUpdate);
         }
+
+        /// <summary>
+        /// Deletes an existing Client
+        /// </summary>
+        /// <param name="id">Unique identifier (Guid) for the Client</param>
+        /// <returns>An instance of the client that was just deleted</returns>
+        [HttpDelete]
+        [Route("/clients/{id}")]
+        public async Task<Client> DeleteExistingClient(Guid id)
+        {
+            return await _service.DeleteExistingClientAsync(id);
+        }
+
     }
 }

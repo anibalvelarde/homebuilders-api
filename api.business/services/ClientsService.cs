@@ -15,10 +15,10 @@ namespace api.business.services
             _dataProvider = provider;
         }
 
-        public Task<Client> AddNewClientAsync(Client prospect)
+        public async Task<Client> AddNewClientAsync(Client prospect)
         {
-            var newClient = new Client(prospect);
-            return Task.FromResult(newClient);
+            Client newClient = await _dataProvider.AddClient(prospect);
+            return newClient;
         }
 
         public async Task<Client> GetClientByIdAsync(Guid id)
@@ -47,9 +47,9 @@ namespace api.business.services
             return Task.FromResult(clients);
         }
 
-        public Task<Client> UpdateExistingClientAsync(Client clientToUpdate)
+        public async Task<Client> UpdateExistingClientAsync(Guid id, Client clientToUpdate)
         {
-            return Task.FromResult(clientToUpdate);
+            return await _dataProvider.UpdateExistingClient(id, clientToUpdate);
         }
 
         private Client MakeFakeClient(int fakeBuilderId)
@@ -63,6 +63,11 @@ namespace api.business.services
                 WebAddress = $"www.server-{fakeBuilderId}.com"
             };
             return new Client(aClient);
+        }
+
+        public async Task<Client> DeleteExistingClientAsync(Guid id)
+        {
+            return await _dataProvider.DeleteClientByIdAsync(id);
         }
     }
 }

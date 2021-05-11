@@ -10,5 +10,8 @@ namespace api.data.interfaces
         Task<List<Client>> FetchAllClientsAsync();
         Task<Client> FetchClientByIdAsync(Guid id);
         Task<IEnumerable<Client>> SearchClientsByNameAsync(string namePattern);
+        Task<Client> AddClient(Client prospect);
+        Task<Client> DeleteClientByIdAsync(Guid id);
+        Task<Client> UpdateExistingClient(Guid id, Client clientToUpdate);
     }
 }
