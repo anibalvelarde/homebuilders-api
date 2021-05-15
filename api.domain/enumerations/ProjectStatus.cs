@@ -5,6 +5,8 @@ namespace api.domain.models.Enums
     /// </summary>
     public enum ProjectStatus
     {
+        /// Brand new project creation state
+        Created,
         /// Initial state for a project
         Organizing,
         /// Actively working with a customer on the conceptual view of a project
