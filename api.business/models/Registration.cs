@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using api.domain.models;
 
 namespace HomeBuilders.Api.Domain.Models
 {
