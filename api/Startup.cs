@@ -13,16 +13,29 @@ using api.business.extensions;
 
 namespace HomeBuilders.Api
 {
+    /// <summary>
+    /// ASP.NET Core Start up class
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Constructor method
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configuration access prop
+        /// </summary>
+        /// <value></value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -66,7 +79,9 @@ namespace HomeBuilders.Api
             return (info.Product, info.AssemblyVersion);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

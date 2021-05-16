@@ -5,6 +5,7 @@ using System.Resources;
 
 namespace HomeBuilders.Api.AuxTypes
 {
+#pragma warning disable 1591
     public class AssemblyInfo
     {
         // The assembly information values.
@@ -85,4 +86,5 @@ namespace HomeBuilders.Api.AuxTypes
             return (T)attributes[0];
         }
     }
+#pragma warning restore 1591
 }
