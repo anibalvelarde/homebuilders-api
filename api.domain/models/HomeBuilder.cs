@@ -2,14 +2,28 @@ using System.Collections.Generic;
 
 namespace api.domain.models
 {
+    /// <summary>
+    /// Represents the Home Builder organization that builds/constructs projects for custmers
+    /// </summary>
     public class HomeBuilder
     {
+        /// <summary>
+        /// Parameterless constructor
+        /// </summary>
         public HomeBuilder()
         { }
+        /// <summary>
+        /// Cretates a home builder basded on a new identifier. It must be unique.
+        /// </summary>
+        /// <param name="id"></param>
         public HomeBuilder(int id)
         {
             Id = id;
         }
+        /// <summary>
+        /// Unique identifier for a Home Builder
+        /// </summary>
+        /// <value></value>
         public int Id { get; private set; }
         /// <summary>
         /// Name of the company (e.g. LLC, LLP, Inc., etc)
