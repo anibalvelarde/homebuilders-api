@@ -8,12 +8,19 @@ namespace api.domain.models
     /// </summary>
     public class Client
     {
+        /// <summary>
+        /// Parameterless constructor
+        /// </summary>
         public Client()
         {
             Id = Guid.Empty;
             CreatedOn = DateTime.MinValue;
         }
 
+        /// <summary>
+        /// Creates an "official" Client based on Client-Prospect's information
+        /// </summary>
+        /// <param name="prospect"></param>
         public Client(Client prospect)
         {
             if (prospect.Id.Equals(Guid.Empty) &&
