@@ -1,33 +1,42 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Reflection;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using HomeBuilders.Api.Services;
-using HomeBuilders.Api.Services.Interfaces;
+using HomeBuilders.Api.AuxTypes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using api.business.extensions;
 
-namespace api.homebuilders
+namespace HomeBuilders.Api
 {
+    /// <summary>
+    /// ASP.NET Core Start up class
+    /// </summary>
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        /// <summary>
+        /// Constructor method
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configuration access prop
+        /// </summary>
+        /// <value></value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -54,11 +63,12 @@ namespace api.homebuilders
             // Note: Add this service at the end after AddMvc() or AddMvcCore().
             services.AddSwaggerGen(c =>
             {
+                (string dllName, string buildVersion) = GetDllInfo();
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "HomeBuilders API",
                     Version = "v1",
-                    Description = "API for Tracking Home Builder projects and Requests for follow-up.",
+                    Description = $"API for Tracking Home Builder projects and Requests for follow-up. Library:{dllName.ToUpper()}. Build:{buildVersion}",
                     Contact = new OpenApiContact
                     {
                         Name = "Anibal Velarde",
@@ -66,18 +76,25 @@ namespace api.homebuilders
                         Url = new Uri("http://anibalvelarde.com/"),
                     },
                 });
+                foreach (var filePath in System.IO.Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)), "*.xml"))
+                {
+                    c.IncludeXmlComments(filePath);
+                }
             });
 
-            // Dependencies
-            services.AddScoped<IHomeBuildersService, HomeBuildersService>();
-            services.AddScoped<IClientsService, ClientsService>();
-            services.AddScoped<IProjectsService, ProjectsService>();
-            services.AddScoped<IWorkOrdersService, WorkOrdersService>();
-            services.AddScoped<IEmployeesService, EmployeesService>();
-            services.AddScoped<IServicePlansService, ServicePlansService>();
+            // Adding Business Layer Dependencies
+            services.SetupBusinessDependencies();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        private (string dllName, string buildVersion) GetDllInfo()
+        {
+            AssemblyInfo info = new AssemblyInfo();
+            return (info.Product, info.AssemblyVersion);
+        }
+
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
